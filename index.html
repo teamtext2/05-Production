@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05 Production - Giới thiệu</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --gold: #ffce00;
+        --dark: #0a0a0a;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--dark);
+        color: white;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+    header {
+        background: rgba(0,0,0,0.85);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        backdrop-filter: blur(8px);
+        animation: fadeIn 1s ease-in-out;
+    }
+    header h1 {
+        font-size: 1.6em;
+        color: var(--gold);
+        letter-spacing: 2px;
+        font-weight: 700;
+    }
+    nav {
+        display: flex;
+        gap: 20px;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        padding: 5px;
+    }
+    nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: var(--gold);
+        transition: 0.3s;
+    }
+    nav a:hover::after {
+        width: 100%;
+    }
+    .menu-toggle {
+        display: none;
+        font-size: 1.8em;
+        cursor: pointer;
+    }
+
+    /* Hero section - PC & Mobile background */
+    .hero {
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+    .hero.pc {
+        background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjShcyj-TWjyZyh08pUeQD9ekEqfs7Mva8igD4v6vCdgDSZTeYojB6EP5qaNy-Hntv9dfrRhkDETMKVa8T-JCGVSAkBjt_2JKxJstZKB9VJ0_fmZysR-RtH0TvPQP46O55guSQrnOhWMbwKOcSpYipom21WkjyYuDUulb_hNMMuqDV3khIpZrPYpWrwZLA/s320/IMG_20250603_152225.jpg');
+    }
+    .hero.mobile {
+        background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjziIMSV_pLIFRi0lNn-6HS3gyJyDpFikddhoWyBLNVSvYzDbLS9iO_3yHy2i9T8cVF-6V4QqGiS5QMdoIjMP9cwjjvQkfhML3sQKizbJj7pQK-_eRfpBBlvZ98kEdSvM6J6uACb4nixg9iqyZOyAHSCJex3Be7E82kj5AZWzMOTWXzlsvYnVhIIGO7mXU/s320/NPH03418.JPG');
+    }
+    .hero::after {
+        content: '';
+        position: absolute;
+        top:0;left:0;width:100%;height:100%;
+        background: rgba(0,0,0,0.55);
+    }
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        animation: slideUp 1s ease;
+    }
+    .hero-content h2 {
+        font-size: 3em;
+        margin-bottom: 15px;
+        color: var(--gold);
+        text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .hero-content p {
+        font-size: 1.2em;
+        color: #ddd;
+    }
+
+    section {
+        padding: 70px 10%;
+    }
+    .about {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+        animation: fadeIn 1.2s ease-in-out;
+    }
+    .about img {
+        width: 420px;
+        max-width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 0 30px rgba(255,255,255,0.1);
+    }
+    .about-text {
+        flex: 1;
+    }
+    .about-text h3 {
+        color: var(--gold);
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+    .videos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+    }
+    .videos iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 0 20px rgba(255,255,255,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .videos iframe:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0 25px rgba(255,206,0,0.3);
+    }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .gallery img {
+        width: 100%;
+        border-radius: 12px;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        cursor: pointer;
+    }
+    .gallery img:hover {
+        transform: scale(1.06);
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    footer {
+        background: #000;
+        padding: 30px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #aaa;
+        border-top: 1px solid #111;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {opacity:0;}
+        to {opacity:1;}
+    }
+    @keyframes slideUp {
+        from {transform: translateY(30px); opacity:0;}
+        to {transform: translateY(0); opacity:1;}
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        nav {
+            display: none;
+            flex-direction: column;
+            background: rgba(0,0,0,0.95);
+            position: absolute;
+            top: 60px;
+            right: 0;
+            padding: 20px;
+            gap: 15px;
+            border-radius: 0 0 8px 8px;
+        }
+        nav.show {
+            display: flex;
+        }
+        .menu-toggle {
+            display: block;
+        }
+        .hero-content h2 {
+            font-size: 2.2em;
+        }
+        .about {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>05 Production</h1>
+    <div class="menu-toggle">☰</div>
+    <nav>
+        <a href="#about">Giới thiệu</a>
+        <a href="#projects">Dự án</a>
+        <a href="#gallery">Hoạt động</a>
+        <a href="#videos">Video</a>
+        <a href="#contact">Liên hệ</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h2>05 Production</h2>
+        <p>Chúng tôi tạo ra sản phẩm truyền thông</p>
+    </div>
+</section>
+
+<section id="about">
+    <div class="about">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6s1LYKBg9nARqVmLAUJcEK1lbuCOTEMWC45TlTMollOO_JMFwNi6Wowad0b_AhZwCCH53v-ub7NsqZRBWwJS9IR6M2Jby5RlI7I15C67jSltIeLLzUOtYbrEU06eG5OY8Dnl-bUpO-tDHVAD8vnz07TncGk1ymLewqmIbnZe__r7OrU1cN2eWz_HJekE/s320/IMG_20250530_191731.jpg">
+        <div class="about-text">
+            <h3>Về chúng tôi</h3>
+            <p>Chúng tôi là nhom chuyên sản xuất các sản phẩm truyền thông</p>
+        </div>
+    </div>
+</section>
+
+<section id="videos">
+    <h3 style="color:var(--gold);text-align:center;font-size:2em;margin-bottom:40px;">Video sản phẩm</h3>
+    <div class="videos">
+        <!-- YouTube -->
+        <iframe src="https://www.youtube.com/embed/UfnzN0ctZ6U" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/N0-UcKcCHA0?si=QserTKktNI0T8rTK" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/9NLNJ9LAz84?si=83I9_tXj7KtwhWlG" allowfullscreen></iframe>
+    </div>
+</section>
+
+<section id="gallery">
+    <h3 style="color:var(--gold);text-align:center;font-size:2em;margin-bottom:40px;">Hình ảnh hoạt động</h3>
+    <div class="gallery">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPiqBh0aIPlDvS8PVtEjn0s-u-U6PqxEX1ewss2yOHzGBHN-L5CQXVyxqSheXB67c8W3_2mln0dE_QMhWwuMsgsM_ZVzMIixXfyWQyk7BhwTCSQBrulOIDXFC3HA7cU3cQRWZGraL24MZfHqdPSnc-u8IFwaCdxYu2VsCe3EPL2ln4TUsIcNKMDJyVBvQ/s320/511152764_122120389664863768_5772396365898159844_n.jpg" alt="Gallery 1">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjw3oMEHmJzydkczhHpG-ULpV3MFPu6wfPHGcGpDN1foMDnpXUA5afqBHAirswe26P9gwHK7qjL2JCloRQ3gTtqC2U8bL5PL63PXA5VAK09vX0eT7u1w0DGNCybJJKsTB3DvgzvZypDvoA8ZTCWcH2VFHr6PeMwnUVFkDKOVP_yIRsy_IOvUnMPkLkteRU/s320/IMG_1742823844573_1742823862715.jpg" alt="Gallery 2">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjShcyj-TWjyZyh08pUeQD9ekEqfs7Mva8igD4v6vCdgDSZTeYojB6EP5qaNy-Hntv9dfrRhkDETMKVa8T-JCGVSAkBjt_2JKxJstZKB9VJ0_fmZysR-RtH0TvPQP46O55guSQrnOhWMbwKOcSpYipom21WkjyYuDUulb_hNMMuqDV3khIpZrPYpWrwZLA/s320/IMG_20250603_152225.jpg" alt="Gallery 3">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTOn_6NTe-tOb16cosAg2Qu5_ynfgcWfz72Pi8QHw6-5z8DBqmJWtYkNJB1OflYkr4j0SW5KpI6sXiyHvOC_dzkg7GJM3fi08qMZOhDjmpmL9IF2_8UyF115KuzLUydUW4WQAqAmEKPDsQ6itgbn8RZ0EbhTy4vpS4EVJNUr6RDujtYY1Bse3b8U0XQRQ/s320/IMG_9645.JPG" alt="Gallery 4">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCv0PD7vcFqA06F-MVaWlHXRBWDssKP7Rempy6KarVz2qxX_zi6UKttXIrtn6heJrVT0Dsm7e5nAiS0asto3kIzUp13S8WxPNp9JtPf3aaGcCe_9eE3s7zo8fi_eAkRo9PRk3cVuzwSkYnDMjiOQtVNBOI3hTIG1zwarbTH27ssIfAWMqSGXYCkXGx91M/s320/IMG_9646.JPG" alt="Gallery 4">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwde4BYkuhEWcmuw-3ZBFx0VP97Maf9cU7xe0isL76MG3TVxIWunrX8DEqaVdPhiK4QRrqwMCHTAWUWg-vkaxID3ugLlV5q089qMbldGNkgCXRcOPMnDQ2E6GLjh7Ke9Sl5a3D6tjVak-mM2VQ23ReD1F-YUbBxFJ2dXo4eZIta4aOUDUXlDvsKHlZAFw/s320/IMG_6900-EDIT.jpg" alt="Gallery 4">
+    </div>
+</section>
+
+<footer id="contact">
+    <p>© 2025 Text2 team company  | Liên hệ: hoanhatanh@text2.click</p>
+</footer>
+
+<script>
+    // Menu mobile toggle
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+        document.querySelector('nav').classList.toggle('show');
+    });
+
+    // Change background depending on device
+    function setHeroBackground() {
+        const hero = document.querySelector('.hero');
+        if (window.innerWidth <= 768) {
+            hero.classList.add('mobile');
+            hero.classList.remove('pc');
+        } else {
+            hero.classList.add('pc');
+            hero.classList.remove('mobile');
+        }
+    }
+    setHeroBackground();
+    window.addEventListener('resize', setHeroBackground);
+</script>
+
+</body>
+</html>
