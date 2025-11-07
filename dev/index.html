@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/styles.css">
-<script src="js/main.js" defer></script>
 <title>05 Production</title>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -72,6 +70,214 @@
 }
 </script>
 
+<style>
+    :root {
+        --gold: #ffce00;
+        --dark: #0a0a0a;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--dark);
+        color: white;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+    header {
+        background: rgba(0,0,0,0.85);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        backdrop-filter: blur(8px);
+        animation: fadeIn 1s ease-in-out;
+    }
+    header h1 {
+        font-size: 1.6em;
+        color: var(--gold);
+        letter-spacing: 2px;
+        font-weight: 700;
+    }
+    nav {
+        display: flex;
+        gap: 20px;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        padding: 5px;
+    }
+    nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: var(--gold);
+        transition: 0.3s;
+    }
+    nav a:hover::after {
+        width: 100%;
+    }
+    .menu-toggle {
+        display: none;
+        font-size: 1.8em;
+        cursor: pointer;
+    }
+
+    /* Hero section - PC & Mobile background */
+    .hero {
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+    .hero.pc {
+        background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjShcyj-TWjyZyh08pUeQD9ekEqfs7Mva8igD4v6vCdgDSZTeYojB6EP5qaNy-Hntv9dfrRhkDETMKVa8T-JCGVSAkBjt_2JKxJstZKB9VJ0_fmZysR-RtH0TvPQP46O55guSQrnOhWMbwKOcSpYipom21WkjyYuDUulb_hNMMuqDV3khIpZrPYpWrwZLA/s320/IMG_20250603_152225.jpg');
+    }
+    .hero.mobile {
+        background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjziIMSV_pLIFRi0lNn-6HS3gyJyDpFikddhoWyBLNVSvYzDbLS9iO_3yHy2i9T8cVF-6V4QqGiS5QMdoIjMP9cwjjvQkfhML3sQKizbJj7pQK-_eRfpBBlvZ98kEdSvM6J6uACb4nixg9iqyZOyAHSCJex3Be7E82kj5AZWzMOTWXzlsvYnVhIIGO7mXU/s320/NPH03418.JPG');
+    }
+    .hero::after {
+        content: '';
+        position: absolute;
+        top:0;left:0;width:100%;height:100%;
+        background: rgba(0,0,0,0.55);
+    }
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        animation: slideUp 1s ease;
+    }
+    .hero-content h2 {
+        font-size: 3em;
+        margin-bottom: 15px;
+        color: var(--gold);
+        text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .hero-content p {
+        font-size: 1.2em;
+        color: #ddd;
+    }
+
+    section {
+        padding: 70px 10%;
+    }
+    .about {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+        animation: fadeIn 1.2s ease-in-out;
+    }
+    .about img {
+        width: 420px;
+        max-width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 0 30px rgba(255,255,255,0.1);
+    }
+    .about-text {
+        flex: 1;
+    }
+    .about-text h3 {
+        color: var(--gold);
+        font-size: 2.2em;
+        margin-bottom: 20px;
+    }
+    .videos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+    }
+    .videos iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 0 20px rgba(255,255,255,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .videos iframe:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0 25px rgba(255,206,0,0.3);
+    }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .gallery img {
+        width: 100%;
+        border-radius: 12px;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        cursor: pointer;
+    }
+    .gallery img:hover {
+        transform: scale(1.06);
+        box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    footer {
+        background: #000;
+        padding: 30px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #aaa;
+        border-top: 1px solid #111;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {opacity:0;}
+        to {opacity:1;}
+    }
+    @keyframes slideUp {
+        from {transform: translateY(30px); opacity:0;}
+        to {transform: translateY(0); opacity:1;}
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        nav {
+            display: none;
+            flex-direction: column;
+            background: rgba(0,0,0,0.95);
+            position: absolute;
+            top: 60px;
+            right: 0;
+            padding: 20px;
+            gap: 15px;
+            border-radius: 0 0 8px 8px;
+        }
+        nav.show {
+            display: flex;
+        }
+        .menu-toggle {
+            display: block;
+        }
+        .hero-content h2 {
+            font-size: 2.2em;
+        }
+        .about {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+</style>
 </head>
 <body>
 
@@ -127,7 +333,7 @@
 </section>
 
 <footer id="contact">
-    <p>© Text2 sở hữu bản quyền này</p>
+    <p>© 2025 Text2 team company  | Liên hệ: hoanhatanh@text2.click</p>
 </footer>
 </body>
 </html>
