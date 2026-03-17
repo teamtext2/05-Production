@@ -1133,3 +1133,32 @@ footer {
 .stat-pill:nth-child(3) {
     animation-delay: .2s;
 }
+
+/* Backlink styling */
+.text-link {
+    color: var(--gold);
+    text-decoration: none;
+    position: relative;
+    transition: var(--transition);
+    font-weight: 600;
+}
+
+.text-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    transition: var(--transition);
+}
+
+.text-link:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px var(--gold-glow);
+}
+
+.text-link:hover::after {
+    width: 100%;
+}
